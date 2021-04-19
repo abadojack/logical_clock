@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+service Bank {
+	rpc MsgDelivery(MsgDeliveryRequest) returns (MsgDeliveryResponse) {}
+}
+
+enum RequestType {
+	QUERY = 0;
+	DEPOSIT = 1;
+	WITHDRAW = 2;
+}
+
+message MsgDeliveryRequest  {
+    int64 money = 1;
+    RequestType request_type = 2;
+    int64 request_id = 3;
+    int64 branch_client_id = 4;
+    int64 clock = 5;
+}
+
+enum StatusCode {
+	SUCCESS = 0;
+	FAILURE = 1;
+	ERROR = 2;
+}
+
+message MsgDeliveryResponse {
+    int64 id = 1;
+    double money = 2;
+    StatusCode status_code = 3;
+    int64 clock = 4;
+}
